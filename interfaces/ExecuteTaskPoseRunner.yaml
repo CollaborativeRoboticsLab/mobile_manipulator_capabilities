@@ -1,0 +1,18 @@
+%YAML 1.1
+---
+name: ExecuteTaskPoseRunner
+spec_version: 1.2
+spec_type: interface
+description: "This capability checks mobile-manipulator task feasibility, optionally repositions the base, and then executes the arm move."
+interface:
+  services:
+    "/check_task_feasibility":
+      type: "mobile_manipulator_msgs::srv::CheckTaskFeasibility"
+      description: "Task feasibility service exposed by the robot-specific mobile-manipulator adapter"
+  actions:
+    "/navigate_to_pose":
+      type: "nav2_msgs::action::NavigateToPose"
+      description: "Navigation action used for base reposition fallback"
+    "/move_arm_to_pose":
+      type: "grasping_msgs::action::MoveToPose"
+      description: "Manipulator Cartesian motion action used for the final arm execution"

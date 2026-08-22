@@ -1,0 +1,12 @@
+<library path="mobile_manipulator_capabilities">
+    <class type="capabilities2_runner::CheckTaskFeasibilityRunner" base_class_type="capabilities2_runner::RunnerBase">
+        <description>
+            A plugin that checks mobile-manipulator task feasibility
+        </description>
+    </class>
+    <class type="capabilities2_runner::ExecuteTaskPoseRunner" base_class_type="capabilities2_runner::RunnerBase">
+        <description>
+            A plugin that executes the full mobile-manipulator fallback policy
+        </description>
+    </class>
+</library>
