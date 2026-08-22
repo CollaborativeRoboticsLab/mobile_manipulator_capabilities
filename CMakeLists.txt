@@ -6,14 +6,12 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
-find_package(ament_cmake_gtest REQUIRED)
 find_package(capabilities2_events REQUIRED)
 find_package(capabilities2_msgs REQUIRED)
 find_package(capabilities2_runner REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(grasping_msgs REQUIRED)
 find_package(mobile_manipulator_msgs REQUIRED)
-find_package(mobile_manipulator_validator REQUIRED)
 find_package(nav2_msgs REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
@@ -63,19 +61,5 @@ install(DIRECTORY providers
 
 ament_export_include_directories(include)
 ament_export_libraries(${PROJECT_NAME})
-
-if(BUILD_TESTING)
-  ament_add_gtest(test_costmap_validator
-    test/test_costmap_validator.cpp
-  )
-  if(TARGET test_costmap_validator)
-    ament_target_dependencies(test_costmap_validator
-      geometry_msgs
-      mobile_manipulator_validator
-      nav2_msgs
-    )
-    target_include_directories(test_costmap_validator PUBLIC include)
-  endif()
-endif()
 
 ament_package()
