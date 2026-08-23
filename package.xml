@@ -12,10 +12,7 @@
   <depend>capabilities2_events</depend>
   <depend>capabilities2_msgs</depend>
   <depend>capabilities2_runner</depend>
-  <depend>geometry_msgs</depend>
-  <depend>grasping_msgs</depend>
   <depend>mobile_manipulator_msgs</depend>
-  <depend>nav2_msgs</depend>
   <depend>pluginlib</depend>
   <depend>rclcpp</depend>
   <depend>rclcpp_action</depend>
@@ -32,6 +29,14 @@
 
     <capability_provider>
       providers/CheckTaskFeasibilityRunner.yaml
+    </capability_provider>
+
+    <capability_interface>
+      interfaces/FindFeasiblePoseRunner.yaml
+    </capability_interface>
+
+    <capability_provider>
+      providers/FindFeasiblePoseRunner.yaml
     </capability_provider>
 
     <capability_interface>

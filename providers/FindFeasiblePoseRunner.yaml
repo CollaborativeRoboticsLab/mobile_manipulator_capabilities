@@ -1,0 +1,132 @@
+%YAML 1.1
+---
+name: FindFeasiblePoseRunner
+spec_type: provider
+spec_version: 1.2
+description: "The provider for mobile-manipulator feasible-pose search queries."
+implements: mobile_manipulator_capabilities/FindFeasiblePoseRunner
+runner: capabilities2_runner::FindFeasiblePoseRunner
+
+definition:
+  command: "<Runner interface=mobile_manipulator_capabilities/FindFeasiblePoseRunner provider=mobile_manipulator_capabilities/FindFeasiblePoseRunner x='$x' y='$y' z='$z' qx='$qx' qy='$qy' qz='$qz' qw='$qw' frame_id='$frame_id' mode='$mode' base_pose_valid='$base_pose_valid' base_x='$base_x' base_y='$base_y' base_z='$base_z' base_qx='$base_qx' base_qy='$base_qy' base_qz='$base_qz' base_qw='$base_qw' base_frame_id='$base_frame_id' />"
+  configuration_parameters:
+    - name: x
+      type: double
+      semantic_key: mobile_manipulator.find_pose.x
+      description: "Target x position in the supplied frame."
+    - name: y
+      type: double
+      semantic_key: mobile_manipulator.find_pose.y
+      description: "Target y position in the supplied frame."
+    - name: z
+      type: double
+      semantic_key: mobile_manipulator.find_pose.z
+      description: "Target z position in the supplied frame."
+    - name: qx
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.find_pose.qx
+      description: "Target orientation quaternion x component."
+    - name: qy
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.find_pose.qy
+      description: "Target orientation quaternion y component."
+    - name: qz
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.find_pose.qz
+      description: "Target orientation quaternion z component."
+    - name: qw
+      type: double
+      optional: true
+      default: 1.0
+      semantic_key: mobile_manipulator.find_pose.qw
+      description: "Target orientation quaternion w component."
+    - name: frame_id
+      type: string
+      optional: true
+      default: "map"
+      semantic_key: mobile_manipulator.find_pose.frame_id
+      description: "Frame in which the target pose is expressed."
+    - name: mode
+      type: string
+      optional: true
+      default: "mobile_manipulator"
+      semantic_key: mobile_manipulator.find_pose.mode
+      description: "Search mode for feasible pose generation."
+    - name: base_pose_valid
+      type: bool
+      optional: true
+      default: false
+      semantic_key: mobile_manipulator.find_pose.base_pose_valid
+      description: "Whether a reference base pose is provided for candidate ranking."
+    - name: base_x
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.find_pose.base_x
+      description: "Reference base pose x position."
+    - name: base_y
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.find_pose.base_y
+      description: "Reference base pose y position."
+    - name: base_z
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.find_pose.base_z
+      description: "Reference base pose z position."
+    - name: base_qx
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.find_pose.base_qx
+      description: "Reference base pose quaternion x component."
+    - name: base_qy
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.find_pose.base_qy
+      description: "Reference base pose quaternion y component."
+    - name: base_qz
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.find_pose.base_qz
+      description: "Reference base pose quaternion z component."
+    - name: base_qw
+      type: double
+      optional: true
+      default: 1.0
+      semantic_key: mobile_manipulator.find_pose.base_qw
+      description: "Reference base pose quaternion w component."
+    - name: base_frame_id
+      type: string
+      optional: true
+      default: ""
+      semantic_key: mobile_manipulator.find_pose.base_frame_id
+      description: "Reference base pose frame."
+  runtime_parameters:
+    output:
+      - name: feasible
+        type: bool
+        semantic_key: mobile_manipulator.find_pose.feasible
+        description: "Whether a feasible candidate was found."
+      - name: failure_reason
+        type: string
+        semantic_key: mobile_manipulator.find_pose.failure_reason
+        description: "Machine-readable reason when no candidate is selected."
+      - name: message
+        type: string
+        semantic_key: mobile_manipulator.find_pose.message
+        description: "Human-readable search result message."
+      - name: base_target_pose_valid
+        type: bool
+        semantic_key: mobile_manipulator.find_pose.base_target_pose_valid
+        description: "Whether the returned base target pose is valid."

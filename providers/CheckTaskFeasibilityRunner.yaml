@@ -8,7 +8,7 @@ implements: mobile_manipulator_capabilities/CheckTaskFeasibilityRunner
 runner: capabilities2_runner::CheckTaskFeasibilityRunner
 
 definition:
-  command: "<Runner interface=mobile_manipulator_capabilities/CheckTaskFeasibilityRunner provider=mobile_manipulator_capabilities/CheckTaskFeasibilityRunner x='$x' y='$y' z='$z' qx='$qx' qy='$qy' qz='$qz' qw='$qw' frame_id='$frame_id' mode='$mode' />"
+  command: "<Runner interface=mobile_manipulator_capabilities/CheckTaskFeasibilityRunner provider=mobile_manipulator_capabilities/CheckTaskFeasibilityRunner x='$x' y='$y' z='$z' qx='$qx' qy='$qy' qz='$qz' qw='$qw' frame_id='$frame_id' mode='$mode' base_pose_valid='$base_pose_valid' base_x='$base_x' base_y='$base_y' base_z='$base_z' base_qx='$base_qx' base_qy='$base_qy' base_qz='$base_qz' base_qw='$base_qw' base_frame_id='$base_frame_id' />"
   configuration_parameters:
     - name: x
       type: double
@@ -58,6 +58,60 @@ definition:
       default: "mobile_manipulator"
       semantic_key: mobile_manipulator.mode
       description: "Feasibility mode such as arm_only_ik, arm_only_plan, or mobile_manipulator."
+    - name: base_pose_valid
+      type: bool
+      optional: true
+      default: false
+      semantic_key: mobile_manipulator.base_pose_valid
+      description: "Whether a specific base pose is supplied for validation."
+    - name: base_x
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.base_pose.x
+      description: "Supplied base pose x position."
+    - name: base_y
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.base_pose.y
+      description: "Supplied base pose y position."
+    - name: base_z
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.base_pose.z
+      description: "Supplied base pose z position."
+    - name: base_qx
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.base_pose.qx
+      description: "Supplied base pose quaternion x component."
+    - name: base_qy
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.base_pose.qy
+      description: "Supplied base pose quaternion y component."
+    - name: base_qz
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.base_pose.qz
+      description: "Supplied base pose quaternion z component."
+    - name: base_qw
+      type: double
+      optional: true
+      default: 1.0
+      semantic_key: mobile_manipulator.base_pose.qw
+      description: "Supplied base pose quaternion w component."
+    - name: base_frame_id
+      type: string
+      optional: true
+      default: ""
+      semantic_key: mobile_manipulator.base_pose.frame_id
+      description: "Frame in which the supplied base pose is expressed."
   runtime_parameters:
     output:
       - name: feasible

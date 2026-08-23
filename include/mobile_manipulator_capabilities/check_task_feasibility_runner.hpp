@@ -1,33 +1,51 @@
 #pragma once
 
-#include <string>
-
-#include <mobile_manipulator_msgs/srv/check_task_feasibility.hpp>
-
 #include <capabilities2_events/event_parameters.hpp>
 #include <capabilities2_runner/service_runner.hpp>
+#include <mobile_manipulator_msgs/srv/check_task_feasibility.hpp>
+#include <string>
 
 namespace capabilities2_runner
 {
+/**
+ * @brief Capability runner that calls the generic task-feasibility service.
+ *
+ * This runner adapts flat capability parameters into a
+ * `mobile_manipulator_msgs::srv::CheckTaskFeasibility` request and maps the
+ * structured response back into capability event parameters.
+ */
 class CheckTaskFeasibilityRunner : public ServiceRunner<mobile_manipulator_msgs::srv::CheckTaskFeasibility>
 {
 public:
-  CheckTaskFeasibilityRunner()
-  : ServiceRunner()
+  /**
+   * @brief Construct the runner with the default service-runner base setup.
+   */
+  CheckTaskFeasibilityRunner() : ServiceRunner()
   {
   }
 
-  void start(rclcpp::Node::SharedPtr node, const runner_opts & run_config, const std::string & bond_id) override
+  /**
+   * @brief Initialize the service client and emit the started event.
+   *
+   * @param node ROS node that owns the client.
+   * @param run_config Runner configuration from the capability provider.
+   * @param bond_id Lifecycle bond identifier for startup notification.
+   */
+  void start(rclcpp::Node::SharedPtr node, const runner_opts& run_config, const std::string& bond_id) override
   {
-    init_service(
-      node, run_config, "/check_task_feasibility",
-      "mobile_manipulator_msgs::srv::CheckTaskFeasibility");
+    init_service(node, run_config, "/check_task_feasibility", "mobile_manipulator_msgs::srv::CheckTaskFeasibility");
     emit_started(bond_id, "", param_on_started());
   }
 
 protected:
-  mobile_manipulator_msgs::srv::CheckTaskFeasibility::Request generate_request(
-    capabilities2_events::EventParameters & parameters) override
+  /**
+   * @brief Build a task-feasibility request from capability event parameters.
+   *
+   * @param parameters Event input parameters provided by the capability system.
+   * @return Populated service request.
+   */
+  mobile_manipulator_msgs::srv::CheckTaskFeasibility::Request
+  generate_request(capabilities2_events::EventParameters& parameters) override
   {
     mobile_manipulator_msgs::srv::CheckTaskFeasibility::Request request;
     request.pose.position.x = std::any_cast<double>(parameters.get_value("x", 0.0));
@@ -39,9 +57,23 @@ protected:
     request.pose.orientation.w = std::any_cast<double>(parameters.get_value("qw", 1.0));
     request.frame_id = std::any_cast<std::string>(parameters.get_value("frame_id", std::string("map")));
     request.mode = std::any_cast<std::string>(parameters.get_value("mode", std::string("mobile_manipulator")));
+    request.base_pose_valid = std::any_cast<bool>(parameters.get_value("base_pose_valid", false));
+    request.base_pose.position.x = std::any_cast<double>(parameters.get_value("base_x", 0.0));
+    request.base_pose.position.y = std::any_cast<double>(parameters.get_value("base_y", 0.0));
+    request.base_pose.position.z = std::any_cast<double>(parameters.get_value("base_z", 0.0));
+    request.base_pose.orientation.x = std::any_cast<double>(parameters.get_value("base_qx", 0.0));
+    request.base_pose.orientation.y = std::any_cast<double>(parameters.get_value("base_qy", 0.0));
+    request.base_pose.orientation.z = std::any_cast<double>(parameters.get_value("base_qz", 0.0));
+    request.base_pose.orientation.w = std::any_cast<double>(parameters.get_value("base_qw", 1.0));
+    request.base_frame_id = std::any_cast<std::string>(parameters.get_value("base_frame_id", std::string("")));
     return request;
   }
 
+  /**
+   * @brief Cache the latest service response for later event emission.
+   *
+   * @param response Service response returned by the runtime server.
+   */
   void process_response(mobile_manipulator_msgs::srv::CheckTaskFeasibility::Response::SharedPtr response) override
   {
     feasible_ = response->feasible;
@@ -58,6 +90,11 @@ protected:
     candidate_score_ = response->candidate_score;
   }
 
+  /**
+   * @brief Convert a successful service response into capability output parameters.
+   *
+   * @return Event parameters containing feasibility and pose details.
+   */
   capabilities2_events::EventParameters param_on_success() override
   {
     capabilities2_events::EventParameters parameters;
@@ -88,25 +125,31 @@ protected:
     return parameters;
   }
 
+  /**
+   * @brief Return failure output when the service call itself fails.
+   *
+   * @return Event parameters containing a generic transport-level failure message.
+   */
   capabilities2_events::EventParameters param_on_failure() override
   {
     capabilities2_events::EventParameters parameters;
-    parameters.set_value("message", std::string("Task feasibility service call failed."), capabilities2_events::OptionType::STRING);
+    parameters.set_value("message", std::string("Task feasibility service call failed."),
+                         capabilities2_events::OptionType::STRING);
     return parameters;
   }
 
 private:
-  bool feasible_{false};
+  bool feasible_{ false };
   std::string mode_used_;
   std::string failure_reason_;
   std::string suggested_fallback_;
   std::string message_;
   std::string planning_frame_;
-  bool planning_pose_valid_{false};
+  bool planning_pose_valid_{ false };
   geometry_msgs::msg::Pose planning_pose_;
   std::string base_target_frame_;
-  bool base_target_pose_valid_{false};
+  bool base_target_pose_valid_{ false };
   geometry_msgs::msg::Pose base_target_pose_;
-  double candidate_score_{0.0};
+  double candidate_score_{ 0.0 };
 };
 }  // namespace capabilities2_runner

@@ -9,10 +9,7 @@ find_package(ament_cmake REQUIRED)
 find_package(capabilities2_events REQUIRED)
 find_package(capabilities2_msgs REQUIRED)
 find_package(capabilities2_runner REQUIRED)
-find_package(geometry_msgs REQUIRED)
-find_package(grasping_msgs REQUIRED)
 find_package(mobile_manipulator_msgs REQUIRED)
-find_package(nav2_msgs REQUIRED)
 find_package(pluginlib REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
@@ -29,10 +26,7 @@ ament_target_dependencies(${PROJECT_NAME}
   capabilities2_events
   capabilities2_msgs
   capabilities2_runner
-  geometry_msgs
-  grasping_msgs
   mobile_manipulator_msgs
-  nav2_msgs
   pluginlib
   rclcpp
   rclcpp_action

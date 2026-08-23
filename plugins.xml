@@ -4,9 +4,14 @@
             A plugin that checks mobile-manipulator task feasibility
         </description>
     </class>
+    <class type="capabilities2_runner::FindFeasiblePoseRunner" base_class_type="capabilities2_runner::RunnerBase">
+        <description>
+            A plugin that finds a feasible mobile-manipulator pose candidate
+        </description>
+    </class>
     <class type="capabilities2_runner::ExecuteTaskPoseRunner" base_class_type="capabilities2_runner::RunnerBase">
         <description>
-            A plugin that executes the full mobile-manipulator fallback policy
+            A plugin that executes a validated mobile-manipulator pose
         </description>
     </class>
 </library>

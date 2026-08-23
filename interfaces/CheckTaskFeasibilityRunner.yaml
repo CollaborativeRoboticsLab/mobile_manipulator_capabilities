@@ -3,9 +3,11 @@
 name: CheckTaskFeasibilityRunner
 spec_version: 1.2
 spec_type: interface
-description: "This capability checks whether a target pose is feasible for arm-only or mobile-manipulator execution."
+description: "This capability checks whether a target pose is feasible for a supplied 
+              or implicit base pose."
 interface:
   services:
     "/check_task_feasibility":
       type: "mobile_manipulator_msgs::srv::CheckTaskFeasibility"
-      description: "Task feasibility service exposed by the robot-specific mobile-manipulator adapter"
+      description: "Service that validates a specific task pose from a supplied or default 
+                    base pose"

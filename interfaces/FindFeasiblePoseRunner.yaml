@@ -1,0 +1,13 @@
+%YAML 1.1
+---
+name: FindFeasiblePoseRunner
+spec_version: 1.2
+spec_type: interface
+description: "This capability generates, validates, and selects a feasible mobile-manipulator 
+              pose candidate."
+interface:
+  services:
+    "/find_feasible_pose":
+      type: "mobile_manipulator_msgs::srv::FindFeasiblePose"
+      description: "Service that generates candidate base poses and returns the best validated 
+                    execution solution"

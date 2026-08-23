@@ -3,12 +3,12 @@
 name: ExecuteTaskPoseRunner
 spec_type: provider
 spec_version: 1.2
-description: "The provider for full mobile-manipulator fallback execution: feasibility check, optional base reposition, re-check, and arm execution."
+description: "Thin action-client provider for the mobile-manipulator coordinator execution flow."
 implements: mobile_manipulator_capabilities/ExecuteTaskPoseRunner
 runner: capabilities2_runner::ExecuteTaskPoseRunner
 
 definition:
-  command: "<Runner interface=mobile_manipulator_capabilities/ExecuteTaskPoseRunner provider=mobile_manipulator_capabilities/ExecuteTaskPoseRunner x='$x' y='$y' z='$z' qx='$qx' qy='$qy' qz='$qz' qw='$qw' frame_id='$frame_id' mode='$mode' />"
+  command: "<Runner interface=mobile_manipulator_capabilities/ExecuteTaskPoseRunner provider=mobile_manipulator_capabilities/ExecuteTaskPoseRunner x='$x' y='$y' z='$z' qx='$qx' qy='$qy' qz='$qz' qw='$qw' frame_id='$frame_id' mode='$mode' validated='$validated' approved_base_pose_valid='$approved_base_pose_valid' approved_base_x='$approved_base_x' approved_base_y='$approved_base_y' approved_base_z='$approved_base_z' approved_base_qx='$approved_base_qx' approved_base_qy='$approved_base_qy' approved_base_qz='$approved_base_qz' approved_base_qw='$approved_base_qw' approved_base_frame='$approved_base_frame' />"
   configuration_parameters:
     - name: x
       type: double
@@ -57,7 +57,67 @@ definition:
       optional: true
       default: "mobile_manipulator"
       semantic_key: mobile_manipulator.execute_pose.mode
-      description: "Execution mode, typically mobile_manipulator."
+      description: "Execution mode associated with the approved solution."
+    - name: validated
+      type: bool
+      optional: true
+      default: false
+      semantic_key: mobile_manipulator.execute_pose.validated
+      description: "Whether the supplied execution solution was validated before invoking the action."
+    - name: approved_base_pose_valid
+      type: bool
+      optional: true
+      default: false
+      semantic_key: mobile_manipulator.execute_pose.approved_base_pose_valid
+      description: "Whether an approved base pose accompanies the target pose."
+    - name: approved_base_x
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.execute_pose.approved_base_x
+      description: "Approved base pose x position."
+    - name: approved_base_y
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.execute_pose.approved_base_y
+      description: "Approved base pose y position."
+    - name: approved_base_z
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.execute_pose.approved_base_z
+      description: "Approved base pose z position."
+    - name: approved_base_qx
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.execute_pose.approved_base_qx
+      description: "Approved base pose quaternion x component."
+    - name: approved_base_qy
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.execute_pose.approved_base_qy
+      description: "Approved base pose quaternion y component."
+    - name: approved_base_qz
+      type: double
+      optional: true
+      default: 0.0
+      semantic_key: mobile_manipulator.execute_pose.approved_base_qz
+      description: "Approved base pose quaternion z component."
+    - name: approved_base_qw
+      type: double
+      optional: true
+      default: 1.0
+      semantic_key: mobile_manipulator.execute_pose.approved_base_qw
+      description: "Approved base pose quaternion w component."
+    - name: approved_base_frame
+      type: string
+      optional: true
+      default: ""
+      semantic_key: mobile_manipulator.execute_pose.approved_base_frame
+      description: "Frame in which the approved base pose is expressed."
   runtime_parameters:
     output:
       - name: message
@@ -71,4 +131,4 @@ definition:
       - name: stage
         type: string
         semantic_key: mobile_manipulator.execute_pose.stage
-        description: "Stage at which the runner succeeded or failed."
+        description: "Coordinator-reported terminal stage such as completed, checking_feasibility, navigating, rechecking, or moving_arm."
