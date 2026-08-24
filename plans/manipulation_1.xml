@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Plan>
+    <Control type="sequential" name="direct_task_feasibility_check">
+        <Runner
+            interface="mobile_manipulator_capabilities/CheckTaskFeasibilityRunner"
+            provider="mobile_manipulator_capabilities/CheckTaskFeasibilityRunner"
+            x="0.65"
+            y="0.10"
+            z="0.30"
+            qx="0.0"
+            qy="0.0"
+            qz="0.0"
+            qw="1.0"
+            frame_id="map"
+            mode="mobile_manipulator"
+            base_pose_valid="false" />
+    </Control>
+</Plan>

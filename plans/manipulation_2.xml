@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Plan>
+    <Control type="sequential" name="task_feasibility_with_supplied_base">
+        <Runner
+            interface="mobile_manipulator_capabilities/CheckTaskFeasibilityRunner"
+            provider="mobile_manipulator_capabilities/CheckTaskFeasibilityRunner"
+            x="0.60"
+            y="-0.20"
+            z="0.25"
+            qx="0.0"
+            qy="0.0"
+            qz="0.7071"
+            qw="0.7071"
+            frame_id="map"
+            mode="mobile_manipulator"
+            base_pose_valid="true"
+            base_x="0.30"
+            base_y="-0.15"
+            base_z="0.0"
+            base_qx="0.0"
+            base_qy="0.0"
+            base_qz="0.0"
+            base_qw="1.0"
+            base_frame_id="map" />
+    </Control>
+</Plan>

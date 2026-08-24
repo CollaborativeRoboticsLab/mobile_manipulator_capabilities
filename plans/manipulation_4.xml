@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Plan>
+    <Control type="sequential" name="execute_approved_task_pose">
+        <Runner
+            interface="mobile_manipulator_capabilities/ExecuteTaskPoseRunner"
+            provider="mobile_manipulator_capabilities/ExecuteTaskPoseRunner"
+            x="0.55"
+            y="0.05"
+            z="0.28"
+            qx="0.0"
+            qy="0.0"
+            qz="0.0"
+            qw="1.0"
+            frame_id="map"
+            mode="mobile_manipulator"
+            validated="true"
+            approved_base_pose_valid="true"
+            approved_base_x="0.25"
+            approved_base_y="0.00"
+            approved_base_z="0.0"
+            approved_base_qx="0.0"
+            approved_base_qy="0.0"
+            approved_base_qz="0.0"
+            approved_base_qw="1.0"
+            approved_base_frame="map" />
+    </Control>
+</Plan>
