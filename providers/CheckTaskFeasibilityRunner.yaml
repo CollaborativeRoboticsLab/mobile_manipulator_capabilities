@@ -134,4 +134,4 @@ definition:
 relations:
   - subject: mobile_manipulator_capabilities/CheckTaskFeasibilityRunner
     predicate: replaces
-    object: capabilities2_runner/CheckCartesianFeasibilityRunner
+    object: moveit2_capabilities/CheckCartesianFeasibilityRunner
