@@ -130,3 +130,8 @@ definition:
         type: string
         semantic_key: mobile_manipulator.feasibility.message
         description: "Human-readable feasibility result message."
+
+relations:
+  - subject: mobile_manipulator_capabilities/CheckTaskFeasibilityRunner
+    predicate: replaces
+    object: capabilities2_runner/CheckCartesianFeasibilityRunner
