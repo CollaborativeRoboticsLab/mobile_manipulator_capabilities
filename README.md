@@ -6,6 +6,14 @@ Capability-layer adapters for the generic mobile-manipulator ROS APIs.
 
 This package maps capability inputs and outputs onto the runtime server in `mobile_manipulator_ros`.
 
+## Ownership Boundary
+
+- `grasping` owns scene activation, active planning-scene state, arm-only feasibility, and arm execution
+- `mobile_manipulator` owns generic arm-plus-base orchestration, candidate generation and selection, and mobile-manipulator execution policy
+- `mobile_manipulator_capabilities` stays a thin adapter layer over the generic ROS services and action
+
+This package should not parse `workspace.yaml`, own `scenes.yaml`, or implement robot-specific mobile-manipulator policy directly. It should translate capability requests into the generic runtime APIs and return their results.
+
 ## Runners
 
 - `CheckTaskFeasibilityRunner`: calls `mobile_manipulator_msgs/srv/CheckTaskFeasibility`
