@@ -120,6 +120,18 @@ definition:
       description: "Frame in which the approved base pose is expressed."
   runtime_parameters:
     output:
+      - name: success
+        type: bool
+        semantic_key: mobile_manipulator.execute_pose.success
+        description: "Whether the execution action completed successfully."
+      - name: feasible
+        type: bool
+        semantic_key: mobile_manipulator.execute_pose.feasible
+        description: "Whether the validated execution request remained feasible."
+      - name: mode_used
+        type: string
+        semantic_key: mobile_manipulator.execute_pose.mode_used
+        description: "Execution or validation mode actually used by the backend."
       - name: message
         type: string
         semantic_key: mobile_manipulator.execute_pose.message
@@ -128,7 +140,87 @@ definition:
         type: string
         semantic_key: mobile_manipulator.execute_pose.failure_reason
         description: "Machine-readable failure reason when execution fails."
+      - name: suggested_fallback
+        type: string
+        semantic_key: mobile_manipulator.execute_pose.suggested_fallback
+        description: "Recommended fallback action when execution fails."
       - name: stage
         type: string
         semantic_key: mobile_manipulator.execute_pose.stage
         description: "Coordinator-reported terminal stage such as completed, checking_feasibility, navigating, rechecking, or moving_arm."
+      - name: planning_frame
+        type: string
+        semantic_key: mobile_manipulator.execute_pose.planning_frame
+        description: "Planning frame used by the backend evaluation."
+      - name: planning_pose_valid
+        type: bool
+        semantic_key: mobile_manipulator.execute_pose.planning_pose_valid
+        description: "Whether the returned planning pose is valid."
+      - name: planning_x
+        type: double
+        semantic_key: mobile_manipulator.execute_pose.planning_pose.x
+        description: "Normalized planning pose x position."
+      - name: planning_y
+        type: double
+        semantic_key: mobile_manipulator.execute_pose.planning_pose.y
+        description: "Normalized planning pose y position."
+      - name: planning_z
+        type: double
+        semantic_key: mobile_manipulator.execute_pose.planning_pose.z
+        description: "Normalized planning pose z position."
+      - name: planning_qx
+        type: double
+        semantic_key: mobile_manipulator.execute_pose.planning_pose.qx
+        description: "Normalized planning pose quaternion x component."
+      - name: planning_qy
+        type: double
+        semantic_key: mobile_manipulator.execute_pose.planning_pose.qy
+        description: "Normalized planning pose quaternion y component."
+      - name: planning_qz
+        type: double
+        semantic_key: mobile_manipulator.execute_pose.planning_pose.qz
+        description: "Normalized planning pose quaternion z component."
+      - name: planning_qw
+        type: double
+        semantic_key: mobile_manipulator.execute_pose.planning_pose.qw
+        description: "Normalized planning pose quaternion w component."
+      - name: base_target_frame
+        type: string
+        semantic_key: mobile_manipulator.execute_pose.base_target_frame
+        description: "Frame of the returned base target pose."
+      - name: base_target_pose_valid
+        type: bool
+        semantic_key: mobile_manipulator.execute_pose.base_target_pose_valid
+        description: "Whether the returned base target pose is valid."
+      - name: base_target_x
+        type: double
+        semantic_key: mobile_manipulator.execute_pose.base_target_pose.x
+        description: "Returned base target pose x position."
+      - name: base_target_y
+        type: double
+        semantic_key: mobile_manipulator.execute_pose.base_target_pose.y
+        description: "Returned base target pose y position."
+      - name: base_target_z
+        type: double
+        semantic_key: mobile_manipulator.execute_pose.base_target_pose.z
+        description: "Returned base target pose z position."
+      - name: base_target_qx
+        type: double
+        semantic_key: mobile_manipulator.execute_pose.base_target_pose.qx
+        description: "Returned base target pose quaternion x component."
+      - name: base_target_qy
+        type: double
+        semantic_key: mobile_manipulator.execute_pose.base_target_pose.qy
+        description: "Returned base target pose quaternion y component."
+      - name: base_target_qz
+        type: double
+        semantic_key: mobile_manipulator.execute_pose.base_target_pose.qz
+        description: "Returned base target pose quaternion z component."
+      - name: base_target_qw
+        type: double
+        semantic_key: mobile_manipulator.execute_pose.base_target_pose.qw
+        description: "Returned base target pose quaternion w component."
+      - name: candidate_score
+        type: double
+        semantic_key: mobile_manipulator.execute_pose.candidate_score
+        description: "Score assigned to the selected candidate solution."
