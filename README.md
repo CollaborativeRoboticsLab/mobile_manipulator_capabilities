@@ -21,6 +21,13 @@ This package should not parse `workspace.yaml`, own `scenes.yaml`, or implement 
 - `ExecuteTaskPoseRunner`: calls `mobile_manipulator_msgs/action/ExecuteTaskPose`
 
 
+## Capability inheritance
+
+```mermaid
+flowchart LR
+	G["mobile_manipulator_capabilities<br/>Generic coordinator interfaces and adapters"]
+```
+
 ## Example Plans
 
 - [plans/manipulation_1.xml](./plans/manipulation_1.xml): direct task-feasibility check for a target pose with no supplied base pose.
